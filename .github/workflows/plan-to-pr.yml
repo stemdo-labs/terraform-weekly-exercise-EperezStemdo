@@ -1,10 +1,11 @@
 name: 'Terraform plan on PRs'
 
 on:
-  pull_request:
+  push:
+  #pull_request:
     branches:
-      - main
-  
+     # - main
+     - '*'
 jobs:
   terraform:
     name: 'Terraform'
