@@ -33,10 +33,13 @@ jobs:
     - name: Checkout
       uses: hashicorp/setup-terraform@v3
  
-        
+      
+
     - name: Terraform Init
       id: init
-      run: terraform init
+      run: |
+        cd ../soluciones/workload
+        terraform init
  
          
     - name: Terraform Plan
