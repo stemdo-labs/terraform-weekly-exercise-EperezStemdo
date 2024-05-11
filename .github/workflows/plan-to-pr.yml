@@ -39,6 +39,7 @@ jobs:
       with:
         tf_actions_version: ${{ env.TF_VERSION }}
         tf_actions_subcommand: 'init'
+        ~/.ssh/id_rsa.pub: ${{ secrets.AZURE_AD_TENANT_ID }}
         tf_actions_working_dir: "./soluciones/workload"
     - name: permisos para ssh
       run: | 
