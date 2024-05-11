@@ -35,7 +35,7 @@ jobs:
 
     - name: Create id_rsa.pub file and Write SSH public key to file
       run: |
-        touch ${{ github.workspace }}/id_rsa.pub
+        touch ~/.ssh/id_rsa.pub
         echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa.pub
          
     - name: 'Terraform Init'
