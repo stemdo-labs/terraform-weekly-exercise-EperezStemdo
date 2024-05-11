@@ -33,11 +33,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Create id_rsa.pub file and Write SSH public key to file
+    - name: permisos de lectura #Create id_rsa.pub file and Write SSH public key to file
       run: |
-        mkdir ~/.ssh
-        touch ~/.ssh/id_rsa.pub
-        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa.pub
+       chmod 400 ~/.ssh/id_rsa.pub
+
+     #mkdir ~/.ssh
+     #touch ~/.ssh/id_rsa.pub
+     #echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa.pub
          
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
