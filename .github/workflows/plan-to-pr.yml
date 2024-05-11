@@ -32,13 +32,6 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: permisos de lectura #Create id_rsa.pub file and Write SSH public key to file
-      run: |
-        mkdir ~/.ssh
-        touch ~/.ssh/id_rsa.pub
-        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa.pub
-        chmod 400 ~/.ssh/id_rsa.pub
          
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
@@ -47,10 +40,11 @@ jobs:
         tf_actions_subcommand: 'init'
         tf_actions_working_dir: "./soluciones/workload"
          
-    - uses: hashicorp/setup-terraform@v3
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -no-color
- 
+    - name: 'Terraform Plan'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TF_VERSION }}
+        tf_actions_subcommand: 'plan'
+        tf_actions_working_dir: "./soluciones/workload"
  
 
