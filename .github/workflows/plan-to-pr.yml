@@ -1,4 +1,4 @@
-name: 'Terraform plan on PRs'
+name: 'Terraform plan on PR'
 
 on:
   push:
@@ -39,6 +39,7 @@ jobs:
         tf_actions_version: ${{ env.TF_VERSION }}
         tf_actions_subcommand: 'init'
         tf_actions_working_dir: "./soluciones/workload"
+        
     - name: permisos para ssh
       run: | 
         chmod 400 ~/.ssh/id_rsa.pub
