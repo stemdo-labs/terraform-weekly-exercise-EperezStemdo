@@ -2,10 +2,10 @@ name: 'Terraform plan on PR'
 
 on:
   push:
-  #pull_request:
+  pull_request:
     branches:
-     # - main
-     - '*'
+      - main
+  
 
 permissions:
   id-token: write
