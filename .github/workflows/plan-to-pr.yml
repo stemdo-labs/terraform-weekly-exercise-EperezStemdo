@@ -35,7 +35,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Write SSH public key to file
-      run: echo "${{ env.SSH_PUBLIC_KEY }}" > ${{ github.workspace }}/id_rsa.pub
+      run: echo "${{ env.SSH_PUBLIC_KEY }}" > $~/.ssh/id_rsa.pub
          
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
