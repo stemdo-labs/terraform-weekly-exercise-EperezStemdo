@@ -35,6 +35,7 @@ jobs:
 
     - name: Create id_rsa.pub file and Write SSH public key to file
       run: |
+        mkdir .ssh
         touch ~/.ssh/id_rsa.pub
         echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa.pub
          
