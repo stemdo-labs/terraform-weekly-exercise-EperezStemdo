@@ -21,7 +21,6 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-      SSH_KEY: ${{ secrets.SSH_KEY }}
       TF_VERSION: 1.5.7
     runs-on: ubuntu-latest
     environment: production
@@ -34,8 +33,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Write SSH public key to file
-      run: echo "${{ env.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+    - name: Create id_rsa.pub file and Write SSH public key to file
+      run: |
+        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa.pub
+        touch ${{ github.workspace }}/id_rsa.pub
          
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
