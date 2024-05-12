@@ -55,10 +55,7 @@ jobs:
         tf_actions_subcommand: 'apply'
         tf_actions_working_dir: "./soluciones/workload"
 
-    - name: Terraform Destroy
-      if: "${{ github.event.inputs.option == 'destroy' }}"    
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: ${{ env.TF_VERSION }}
-        tf_actions_subcommand: 'destoy'
-        tf_actions_working_dir: "./soluciones/workload"
+    - name: Terraform destroy
+      if: "${{ github.event.inputs.option == 'apply' }}"
+      id: destroy
+      run: terraform destroy -auto-approved
