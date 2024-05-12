@@ -56,6 +56,6 @@ jobs:
         tf_actions_working_dir: "./soluciones/workload"
 
     - name: Terraform destroy
-      if: "${{ github.event.inputs.option == 'apply' }}"
+      if: "${{ github.event.inputs.option == 'destroy' }}"
       id: destroy
       run: terraform destroy -auto-approved
