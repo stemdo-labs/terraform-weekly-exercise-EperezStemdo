@@ -1,0 +1,60 @@
+name: Terraform plan, apply or destroy
+
+on:
+  workflow_dispatch:
+    inputs:
+      option:
+        type: choice
+        options: 
+        - plan
+        - apply
+        - destroy
+        
+jobs:
+  terraform:
+    name: 'Terraform'
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+      TF_VERSION: 1.5.7
+   
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+         
+    - name: 'Terraform Init'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TF_VERSION }}
+        tf_actions_subcommand: 'init'
+        tf_actions_working_dir: "./soluciones/workload"
+
+    - name: Terraform Plan
+      if: "${{ github.event.inputs.option == 'plan' }}"    
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TF_VERSION }}
+        tf_actions_subcommand: 'plan'
+        tf_actions_working_dir: "./soluciones/workload"
+
+    - name: Terraform Apply
+      if: "${{ github.event.inputs.option == 'apply' }}"    
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TF_VERSION }}
+        tf_actions_subcommand: 'apply'
+        tf_actions_working_dir: "./soluciones/workload"
+
+    - name: Terraform destroy
+      if: "${{ github.event.inputs.option == 'destroy' }}"
+      id: destroy
+      run: terraform destroy -auto-approve
