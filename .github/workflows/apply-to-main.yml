@@ -1,10 +1,8 @@
 name: 'Terraform apply on closed PR'
 
 on:
-  #pull_request:
   push:
-    branches:
-      - '*'
+    branches: [main]
   
 
 permissions:
