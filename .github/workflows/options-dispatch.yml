@@ -40,7 +40,7 @@ jobs:
         tf_actions_working_dir: "./soluciones/workload"
 
     - name: Terraform Plan
-      if: "${{ github.event.inputs.tf_option == 'plan' }}"    
+      if: "${{ github.event.inputs.option == 'plan' }}"    
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: ${{ env.TF_VERSION }}
@@ -48,7 +48,7 @@ jobs:
         tf_actions_working_dir: "./soluciones/workload"
 
     - name: Terraform Apply
-      if: "${{ github.event.inputs.tf_option == 'apply' }}"    
+      if: "${{ github.event.inputs.option == 'apply' }}"    
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: ${{ env.TF_VERSION }}
@@ -56,7 +56,7 @@ jobs:
         tf_actions_working_dir: "./soluciones/workload"
 
     - name: Terraform Destroy
-      if: "${{ github.event.inputs.tf_option == 'destroy' }}"    
+      if: "${{ github.event.inputs.option == 'destroy' }}"    
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: ${{ env.TF_VERSION }}
